@@ -1,0 +1,32 @@
+{
+  "name": "inline-assets-html-plugin",
+  "version": "1.0.0",
+  "description": "A webpack plugin to inline assets into the html page",
+  "author": "Garth Poitras <garth@neat.software>",
+  "homepage": "https://github.com/neatsoftware/inline-assets-html-plugin",
+  "repository": "https://github.com/neatsoftware/inline-assets-html-plugin.git",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "flt"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "inline",
+    "assets",
+    "html",
+    "style",
+    "script"
+  ],
+  "peerDependencies": {
+    "html-webpack-plugin": "^4.0.0"
+  },
+  "devDependencies": {
+    "flt": "^0.34.0"
+  },
+  "prettier": "flt/config/prettier.config.js"
+}

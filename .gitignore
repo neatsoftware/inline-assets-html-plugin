@@ -1,0 +1,8 @@
+*.log
+npm-debug.log*
+node_modules/
+.npm
+.*cache
+.node_repl_history
+*.tgz
+dist
