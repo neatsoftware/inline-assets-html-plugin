@@ -1,11 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const PluginName = 'InlineAssetsHtmlPlugin'
+
 const InlineTypes = [
   { assetTagName: 'script', srcAttr: 'src', inlineTagName: 'script' },
   { assetTagName: 'link', srcAttr: 'href', inlineTagName: 'style' }
 ]
-
-const PluginName = 'InlineAssetsHtmlPlugin'
 
 class InlineAssetsHtmlPlugin {
   constructor(options = {}) {
@@ -39,11 +39,19 @@ class InlineAssetsHtmlPlugin {
       })
 
       if (this.options.emit) return
-      compiler.hooks.emit.tap(PluginName, () => {
-        Object.keys(compilation.assets).forEach((name) => {
-          if (this.options.test.test(name)) delete compilation.assets[name]
-        })
-      })
+
+      compilation.hooks.processAssets.tapAsync(
+        {
+          name: PluginName,
+          stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE
+        },
+        (compilationAssets, callback) => {
+          Object.keys(compilationAssets).forEach((name) => {
+            if (this.options.test.test(name)) delete compilationAssets[name]
+          })
+          callback()
+        }
+      )
     })
   }
 }
